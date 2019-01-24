@@ -3,9 +3,11 @@
 
 # FILL THESE COMMENTS IN
 #*****************************************
-# YOUR NAME:
-# NUMBER OF HOURS TO COMPLETE:  (please track how long this homework takes you to complete).
+# YOUR NAME: Grant Smith
+#
+# NUMBER OF HOURS TO COMPLETE: 2 (please track how long this homework takes you to complete).
 # YOUR COLLABORATION STATEMENT(s) (refer to syllabus):
+#Googled Heron's Formula
 #
 #*****************************************
 
@@ -28,7 +30,7 @@ def intersectionoftwolines_x(m1, b1, m2, b2):
     # y = (m1 * x) + b1 and y = (m2 * x) + b2 intersect.
     
     
-    x = 0 #replace this with your calculation for x
+    x = ((b1-b2)/(m2-m1)) #replace this with your calculation for x
     return x
 
 def intersectionoftwolines_y(m1, b1, m2, b2):
@@ -36,7 +38,7 @@ def intersectionoftwolines_y(m1, b1, m2, b2):
     # y = (m1 * x) + b1 and y = (m2 * x) + b2 intersect.
     
     
-    y = 0 #replace this with your calculation for y
+    y = ((-b2*m1+b1*m2)/(m2-m1)) #replace this with your calculation for y
     return y
 
 
@@ -45,16 +47,16 @@ def distancebetweenpoints(x1, y1, x2, y2):
     # (x1, y1) and (x2, y2).
     
     
-    distance = 0 # replace with your calculation for distance
+    distance = math.sqrt((x2-x1)**2 + (y2-y1)**2) # replace with your calculation for distance
     return distance
     
 def heronsformula(a, b, c):
     # Calculate the area of a triangle with three known side lengths.
     # You may want to look up Heron's formula online.
     
-    
-    
-    area = 0 #replace this with your calculation for area
+    s = ((.5)*(a+b+c))
+
+    area = math.sqrt(s*(s-a)*(s-b)*(s-c)) #replace this with your calculation for area
     return area
     
 def areaofatriangle(m1, b1, m2, b2, m3, b3):
@@ -62,11 +64,26 @@ def areaofatriangle(m1, b1, m2, b2, m3, b3):
     #triangle when the three sides are described by three linear equations
     #y = (m1 * x) + b1;  y = (m2 * x) + b2; and y = (m3 * x) + b3
     
+    #x point variable
+    pointx1 = intersectionoftwolines_x(m3, b3, m1, b1)
+    pointx2 = intersectionoftwolines_x(m2, b2, m1, b1)
+    pointx3 = intersectionoftwolines_x(m3, b3, m2, b2)
+
+    #y point variable
+    pointy1 = intersectionoftwolines_y(m3, b3, m1, b1)
+    pointy2 = intersectionoftwolines_y(m2, b2, m1, b1)
+    pointy3 = intersectionoftwolines_y(m3, b3, m2, b2)
+
+    #distance between points
+
+    distline1 = distancebetweenpoints(pointx1, pointy1, pointx2, pointy2)
+    distline2 = distancebetweenpoints(pointx2, pointy2, pointx3, pointy3)
+    distline3 = distancebetweenpoints(pointx1, pointy1, pointx3, pointy3)
     
-    area = 0 #replace this with your calculation for area
+    area = heronsformula(distline1, distline2, distline3) #replace this with your calculation for area
     return area
     
-    
+
 #TEST CASES
 #These print statements will be true when your functions are working.
 
